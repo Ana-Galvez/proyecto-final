@@ -5,7 +5,7 @@ from flask_marshmallow import Marshmallow
 app=Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:yanina@localhost/proyectofinal'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://amg1688:yanina1688@amg1688.mysql.pythonanywhere-services.com/amg1688$default'
 # URI de la BBDD                          driver de la BD  user:clave@URLBBDD/nombreBBDD
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db= SQLAlchemy(app)
@@ -39,26 +39,26 @@ class PacienteSchema(ma.Schema):
 paciente_schema=PacienteSchema()
 pacientes_schema=PacienteSchema(many=True)
 
-@app.route('/pacientes',methods=['GET'])
+@app.route('/index',methods=['GET'])
 def get_Pacientes():
     all_pacientes=Paciente.query.all()
     result=pacientes_schema.dump(all_pacientes)
                                                 
     return jsonify(result)
 
-@app.route('/pacientes/<id>',methods=['GET'])
+@app.route('/index/<id>',methods=['GET'])
 def get_paciente(id):
     paciente=Paciente.query.get(id)
     return paciente_schema.jsonify(paciente)
 
-@app.route('/pacientes/<id>',methods=['DELETE'])
+@app.route('/index/<id>',methods=['DELETE'])
 def delete_paciente(id):
     paciente=Paciente.query.get(id)
     db.session.delete(paciente)
     db.session.commit()
     return paciente_schema.jsonify(paciente)
 
-@app.route('/pacientes', methods=['POST'])
+@app.route('/index', methods=['POST'])
 def create_paciente():
  
     dni=request.json['dni']
@@ -74,7 +74,7 @@ def create_paciente():
     db.session.commit()
     return paciente_schema.jsonify(new_paciente)
 
-@app.route('/pacientes/<id>' ,methods=['PUT'])
+@app.route('/index/<id>' ,methods=['PUT'])
 def update_paciente(id):
     paciente=Paciente.query.get(id)
  
@@ -98,6 +98,3 @@ def update_paciente(id):
 
     db.session.commit()
     return paciente_schema.jsonify(paciente)
-# programa principal *******************************
-if __name__=='__main__':  
-    app.run(debug=True, port=5000)    # ejecuta el servidor Flask en el puerto 5000

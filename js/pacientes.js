@@ -3,9 +3,8 @@ createApp({
 data() {
 return {
 pacientes:[],
-//url:'http://localhost:5000/productos',
-// si el backend esta corriendo local usar localhost 5000(si no lo subieron a pythonanywhere)
-url:'http://127.0.0.1:5000/pacientes', // si ya lo subieron a pythonanywhere
+
+url:'https://amg1688.pythonanywhere.com/index',
 error:false,
 cargando:true,
 /*atributos para el guardar los valores del formulario */
@@ -61,8 +60,8 @@ methods: {
         alert("Falta agregar datos. Verifique por favor");
         e.preventDefault();
       }
-      if(this.fecha_nacimiento<"1900-01-01"){
-        alert("Fecha de nacimiento desde 01-01-1900")
+      if(this.fecha_nacimiento<"1900-01-01" || this.fecha_nacimiento>"2099-12-31"){
+        alert("Fecha de nacimiento desde 01-01-1900 hasta 31-12-2099")
         e.preventDefault();
       }
       let expresionMail=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -80,7 +79,7 @@ methods: {
       .then(function () {
       alert("Paciente grabado con éxito")
       
-      window.location.href = "./pacientes.html";
+      window.location.href = "./index.html";
       
       // const fecha=new Date();
       //   this.fecha_nacimiento=fecha.toLocaleDateString('en-US',{
@@ -92,7 +91,7 @@ methods: {
       .catch(err => {
       console.error(err);
         alert("Error al Grabar")
-        window.location.href = "./pacientes.html"
+        window.location.href = "./index.html"
       })
     },
     // fechaFormateada(fecha){
