@@ -7,10 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
     crossorigin="anonymous">
-
   </head>
   <body>
-
     <main>
       <div id="app" class="container">
         <h1 class="d-flex justify-content-center">Pacientes</h1>
@@ -48,7 +46,7 @@
                     <td>{{paciente.dni}}</td>
                     <td class="text-uppercase">{{paciente.nombre}}</td>
                     <td class="text-uppercase">{{paciente.apellido}}</td>
-                    <td>{{paciente.fecha_nacimiento}}</td>
+                    <td>{{paciente.fecha_nacimiento.split("-").reverse().join("-")}}</td>
                     <td class="text-uppercase">{{paciente.direccion}}</td>
                     <td>{{paciente.telefono}}</td>
                     <td>{{paciente.email}}</td>

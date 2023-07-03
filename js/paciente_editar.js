@@ -1,4 +1,4 @@
-console.log(location.search) // lee los argumentos pasados a este formulario
+console.log(location.search)
 var id=location.search.substr(4)
 console.log(id)
 const { createApp } = Vue
@@ -49,6 +49,21 @@ fetch(url)
             email:this.email,
             cobertura:this.cobertura
           }
+          if(!this.dni || !this.nombre || !this.apellido || !this.fecha_nacimiento || !this.direccion
+            || !this.telefono || !this.email || !this.cobertura){
+            alert("Falta agregar datos. Verifique por favor");
+            e.preventDefault();
+          }
+          if(this.fecha_nacimiento<"1900-01-01"){
+            alert("Fecha de nacimiento desde 01-01-1900")
+            e.preventDefault();
+          }
+          let expresionMail=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          if (!expresionMail.test(this.email)){
+            alert("El email está mal ingresado.Verifique que esté bien escrito");
+            e.preventDefault();
+          }
+
           var options = {
           body: JSON.stringify(paciente),
           method: 'PUT',
@@ -71,88 +86,3 @@ fetch(url)
           this.fetchData(this.url)
           },
           }).mount('#app')
-
-
-
-
-
-// console.log(location.search) // lee los argumentos pasados a este formulario
-// var dni=location.search.substr(4)
-// console.log(dni)
-// const { createApp } = Vue
-// createApp({
-// data() {
-// return {
-// dni:"",
-// nombre:"",
-// apellido:"",
-// fecha_nacimiento:19000101,
-// direccion:"",
-// telefono:"",
-// email:"",
-// cobertura:"",
-// url:'http://127.0.0.1:5000/pacientes/'+dni,
-// }
-// },
-// methods: {
-// fetchData(url) {
-// fetch(url)
-// .then(response => response.json())
-//         .then(data => {
-//           console.log(data)
-          // this.dni=data.dni
-          // this.nombre=data.nombre
-          // this.apellido=data.apellido
-          // this.fecha_nacimiento=data.fecha_nacimiento
-          // this.direccion=data.direccion
-          // this.telefono=data.telefono
-          // this.email=data.email
-          // this.cobertura=data.cobertura
-//           })
-//           .catch(err => {
-//           console.error(err);
-//           this.error=true
-//           })
-//           },
-//           modificar() {
-//           let producto = {
-            // dni:this.dni,
-            // nombre:this.nombre,
-            // apellido:this.apellido,
-            // fecha_nacimiento:this.fecha_nacimiento,
-            // direccion:this.direccion,
-            // telefono:this.telefono,
-            // email:this.email,
-            // cobertura:this.cobertura
-//           }
-//           var options = {
-//           body: JSON.stringify(producto),
-//           method: 'PUT',
-//           headers: { 'Content-Type': 'application/json' },
-//           redirect: 'follow'
-//           }
-//           fetch(this.url, options)
-//           .then(function () {
-//           alert("Registro modificado")
-//           window.location.href = "./pacientes.html";
-//           })
-//           .catch(err => {
-//           console.error(err);
-//           alert("Error al Modificar")
-//           window.location.href = "./pacientes.html";
-//           })
-//           }
-//           },
-//           created() {
-//           this.fetchData(this.url)
-//           },
-//           }).mount('#app')
-
-
-
-
-
-
-
-
-
